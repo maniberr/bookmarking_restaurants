@@ -31,17 +31,26 @@ streamlit run app.py
 ```
 Then open `http://localhost:8501` in your browser, paste your URLs, and explore your map.
 
+## App Features
+
+- **URL input** — paste one or more Instagram URLs and hit Extract to run the full pipeline
+- **Results cards** — each found restaurant is shown with name, address, rating, and a Maps link
+- **Interactive map** — all saved restaurants displayed as pins on a dark-themed map
+- **Restaurant list** — browse all saved spots in a table sorted by country, city, and name, with ratings and direct Google Maps links
+
 ## Project Structure
 ```
-├── main.py          # entry point, orchestrates the full pipeline
-├── scraper.py       # fetches Instagram post data via Apify
-├── extractor.py     # extracts restaurant names and cities using Groq AI
-├── maps.py          # looks up places via Google Places API
-├── database.py      # saves results to SQLite
-├── visualizer.py    # generates the interactive HTML map
-├── app.py           # Streamlit web interface
+├── main.py            # entry point, orchestrates the full pipeline
+├── scraper.py         # fetches Instagram post data via Apify
+├── extractor.py       # extracts restaurant names and cities using Groq AI
+├── maps.py            # looks up places via Google Places API
+├── geocoding.py       # reverse geocodes lat/lng to country
+├── database.py        # saves results to SQLite
+├── visualizer.py      # generates the interactive HTML map
+├── export_restaurants.py  # loads restaurants into a sorted dataframe
+├── app.py             # Streamlit web interface
 ├── requirements.txt
-└── .env             # API keys (never committed)
+└── .env               # API keys (never committed)
 ```
 
 ## Limitations
