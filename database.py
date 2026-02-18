@@ -1,0 +1,48 @@
+import sqlite3
+import os
+
+DB_PATH = "restaurants.db"
+
+def init_db():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS restaurants (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            address TEXT,
+            city TEXT,
+            rating REAL,
+            lat REAL,
+            lng REAL,
+            maps_url TEXT,
+            instagram_url TEXT,
+            date_saved TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    conn.commit()
+    conn.close()
+
+def save_restaurant(name, address, city, rating, lat, lng, maps_url, instagram_url):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    # Avoid duplicates by checking name + city
+    cursor.execute("SELECT id FROM restaurants WHERE name = ? AND city = ?", (name, city))
+    if cursor.fetchone():
+        print(f"  {name} already in database, skipping.")
+        conn.close()
+        return
+    cursor.execute("""
+        INSERT INTO restaurants (name, address, city, rating, lat, lng, maps_url, instagram_url)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    """, (name, address, city, rating, lat, lng, maps_url, instagram_url))
+    conn.commit()
+    conn.close()
+
+def get_all_restaurants():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("SELECT name, address, city, rating, lat, lng, maps_url, instagram_url, date_saved FROM restaurants")
+    rows = cursor.fetchall()
+    conn.close()
+    return rows

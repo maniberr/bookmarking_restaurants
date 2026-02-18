@@ -2,14 +2,18 @@ import sys
 from scraper import scrape_post
 from extractor import extract_restaurants
 from maps import find_place
+from database import init_db, save_restaurant
+from visualizer import generate_map
 
 def main(url: str):
+    init_db()
+
     print("Scraping post...")
     post_data = scrape_post(url)
 
     print("Extracting restaurants...")
     restaurants = extract_restaurants(post_data["caption"], post_data["image_urls"], post_data["owner"])
-    print(restaurants)
+
     if not restaurants:
         print("No restaurants found.")
         return
@@ -24,8 +28,22 @@ def main(url: str):
             print(f"Coordinates: {place['lat']}, {place['lng']}")
             print(f"Maps URL: {place['maps_url']}")
             print()
+            save_restaurant(
+                name=place["name"],
+                address=place["address"],
+                city=r["city"],
+                rating=place["rating"],
+                lat=place["lat"],
+                lng=place["lng"],
+                maps_url=place["maps_url"],
+                instagram_url=url
+            )
         else:
             print(f"Could not find {r['restaurant']} on Google Maps.\n")
+
+    print("Generating map...")
+    generate_map()
+    print("Done! Open map.html in your browser to see your saved restaurants.")
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
