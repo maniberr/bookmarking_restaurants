@@ -47,7 +47,7 @@ Then open `http://localhost:8501` in your browser, paste your URLs, and explore 
 ├── geocoding.py       # reverse geocodes lat/lng to country
 ├── database.py        # saves results to SQLite
 ├── visualizer.py      # generates the interactive HTML map
-├── export_restaurants.py  # loads restaurants into a sorted dataframe
+├── restaurants_list.py  # loads restaurants into a sorted dataframe
 ├── app.py             # Streamlit web interface
 ├── requirements.txt
 └── .env               # API keys (never committed)
