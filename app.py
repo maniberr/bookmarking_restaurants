@@ -4,7 +4,9 @@ from extractor import extract_restaurants
 from maps import find_place
 from database import init_db, save_restaurant, get_all_restaurants
 from visualizer import generate_map
+from restaurants_list import get_restaurants_df
 import streamlit.components.v1 as components
+import pandas as pd
 
 st.set_page_config(
     page_title="Restaurant Bookmarker",
@@ -164,3 +166,16 @@ if all_restaurants:
     components.html(map_html, height=600, scrolling=False)
 else:
     st.markdown("<p style='color:#555;'>No restaurants saved yet. Paste some URLs above to get started.</p>", unsafe_allow_html=True)
+
+st.markdown("---")
+st.markdown("<h2>All Saved Restaurants</h2>", unsafe_allow_html=True)
+
+if get_all_restaurants():
+    with st.spinner("Loading restaurant list..."):
+        df = get_restaurants_df()
+        df.columns = ["Country", "City", "Restaurant Name", "Rating", "Google Maps URL"]
+        df["Rating"] = df["Rating"].apply(lambda x: "★" * int(x) + "☆" * (5 - int(x)) if pd.notna(x) and x else "N/A")
+        df["Google Maps URL"] = df["Google Maps URL"].apply(lambda x: f'<a href="{x}" target="_blank">View →</a>' if x else "")
+        st.write(df.to_html(escape=False, index=False), unsafe_allow_html=True)
+else:
+    st.markdown("<p style='color:#555;'>No restaurants saved yet.</p>", unsafe_allow_html=True)

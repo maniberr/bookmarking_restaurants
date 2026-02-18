@@ -12,6 +12,7 @@ def init_db():
             name TEXT NOT NULL,
             address TEXT,
             city TEXT,
+            country TEXT,
             rating REAL,
             lat REAL,
             lng REAL,
@@ -23,19 +24,18 @@ def init_db():
     conn.commit()
     conn.close()
 
-def save_restaurant(name, address, city, rating, lat, lng, maps_url, instagram_url):
+def save_restaurant(name, address, city, country, rating, lat, lng, maps_url, instagram_url):
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
-    # Avoid duplicates by checking name + city
     cursor.execute("SELECT id FROM restaurants WHERE name = ? AND city = ?", (name, city))
     if cursor.fetchone():
         print(f"  {name} already in database, skipping.")
         conn.close()
         return
     cursor.execute("""
-        INSERT INTO restaurants (name, address, city, rating, lat, lng, maps_url, instagram_url)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    """, (name, address, city, rating, lat, lng, maps_url, instagram_url))
+        INSERT INTO restaurants (name, address, city, country, rating, lat, lng, maps_url, instagram_url)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (name, address, city, country, rating, lat, lng, maps_url, instagram_url))
     conn.commit()
     conn.close()
 

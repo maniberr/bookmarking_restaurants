@@ -75,6 +75,8 @@ Flask @ file:///home/ktietz/src/ci/flask_1611932660458/work
 folium==0.18.0
 fsspec @ file:///tmp/build/80754af9/fsspec_1617959894824/work
 future==0.18.2
+geographiclib==2.1
+geopy==2.4.1
 gevent @ file:///opt/concourse/worker/volumes/live/123efac8-0706-463e-4084-078386897222/volume/gevent_1616772940436/work
 gitdb==4.0.12
 gitpython==3.1.46
