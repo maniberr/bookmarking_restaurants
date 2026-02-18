@@ -53,5 +53,5 @@ Then open `http://localhost:8501` in your browser, paste your URLs, and explore 
 ## Future Improvements
 
 - [ ] Filter map by city or cuisine type
+- [ ] Support for Reels/Video posts on Instagram
 - [ ] Support for TikTok and other platforms
-- [ ] Export to Google My Maps as KML
