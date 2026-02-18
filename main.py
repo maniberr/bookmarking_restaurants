@@ -50,4 +50,4 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python main.py <url1> <url2> <url3> ...")
         sys.exit(1)
-    main(sys.argv[1:])
+    main(sys.argv[1])
