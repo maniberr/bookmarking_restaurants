@@ -33,10 +33,10 @@ Then open `http://localhost:8501` in your browser, paste your URLs, and explore 
 
 ## App Features
 
-- **URL input** — paste one or more Instagram URLs and hit Extract to run the full pipeline
-- **Results cards** — each found restaurant is shown with name, address, rating, and a Maps link
-- **Interactive map** — all saved restaurants displayed as pins on a dark-themed map
-- **Restaurant list** — browse all saved spots in a table sorted by country, city, and name, with ratings and direct Google Maps links
+- **URL input**: Paste one or more Instagram URLs and hit Extract to run the full pipeline
+- **Results cards**: Each found restaurant is shown with name, address, rating, and a Maps link
+- **Interactive map**: All saved restaurants displayed as pins on a dark-themed map
+- **Restaurant list**: Browse all saved spots in a table sorted by country, city, and name, with ratings and direct Google Maps links
 
 ## Project Structure
 ```
