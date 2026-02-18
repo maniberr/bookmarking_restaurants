@@ -32,8 +32,3 @@ def find_place(restaurant: str, city: str) -> dict:
         "lng": place["geometry"]["location"]["lng"],
         "maps_url": f"https://www.google.com/maps/place/?q=place_id:{place.get('place_id')}"
     }
-
-
-if __name__ == "__main__":
-    result = find_place("Monsieur", "New York City")
-    print(result)

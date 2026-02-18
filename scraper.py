@@ -46,14 +46,3 @@ def scrape_post(url: str) -> dict:
         "owner": post.get("ownerUsername", ""),
         "shortcode": post.get("shortCode", ""),
     }
-
-
-if __name__ == "__main__":
-    url = sys.argv[1]
-    data = scrape_post(url)
-    print(f"Owner: {data['owner']}")
-    print(f"Location tag: {data['location']}")
-    print(f"Caption preview: {data['caption'][:300]}")
-    print(f"Alt Texts: {data['alt_texts']}")
-    print(f"Images found: {len(data['image_urls'])}")
-    print(f"Image URLs: {data['image_urls']}")
