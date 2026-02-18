@@ -1,5 +1,4 @@
 import folium
-from folium.plugins import MarkerCluster
 from database import get_all_restaurants
 
 def generate_map(output_path="map.html"):
@@ -14,11 +13,10 @@ def generate_map(output_path="map.html"):
 
     m = folium.Map(
         location=[avg_lat, avg_lng],
-        zoom_start=13,
+        zoom_start=2,
         tiles=None
     )
 
-    # Dark elegant tile layer
     folium.TileLayer(
         tiles="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
         attr="CartoDB",
@@ -94,7 +92,15 @@ def generate_map(output_path="map.html"):
                 icon=folium.DivIcon(html=icon_html, icon_size=(14, 14), icon_anchor=(7, 7))
             ).add_to(m)
 
-    # Inject custom CSS into the map HTML
+    # Auto fit map to show all markers regardless of location
+    all_lats = [r[4] for r in restaurants if r[4]]
+    all_lngs = [r[5] for r in restaurants if r[5]]
+    if all_lats and all_lngs:
+        m.fit_bounds([
+            [min(all_lats), min(all_lngs)],
+            [max(all_lats), max(all_lngs)]
+        ])
+
     custom_css = """
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=EB+Garamond&display=swap');
