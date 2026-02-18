@@ -4,17 +4,8 @@ from extractor import extract_restaurants
 from maps import find_place
 from database import init_db, save_restaurant
 from visualizer import generate_map
-from geopy.geocoders import Nominatim
+from geocoding_country import get_country
 import time
-
-geolocator = Nominatim(user_agent="restaurant-bookmarker/1.0")
-
-def get_country(lat, lng) -> str:
-    try:
-        location = geolocator.reverse(f"{lat}, {lng}", language="en")
-        return location.raw.get("address", {}).get("country", "Unknown")
-    except Exception:
-        return "Unknown"
     
 def process_url(url: str):
     print(f"\nProcessing: {url}")
@@ -50,7 +41,7 @@ def process_url(url: str):
             )
         else:
             print(f"  Could not find {r['restaurant']} on Google Maps.")
-            
+
 def main(urls: list):
     init_db()
 

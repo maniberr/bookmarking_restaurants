@@ -7,6 +7,8 @@ from visualizer import generate_map
 from restaurants_list import get_restaurants_df
 import streamlit.components.v1 as components
 import pandas as pd
+from geocoding_country import get_country
+import time
 
 st.set_page_config(
     page_title="Restaurant Bookmarker",
@@ -120,11 +122,15 @@ if run and urls_input.strip():
 
                 for r in restaurants:
                     place = find_place(r["restaurant"], r["city"])
+    
                     if place:
+                        country = get_country(place["lat"],place["lng"])
+                        time.sleep(1)
                         save_restaurant(
                             name=place["name"],
                             address=place["address"],
                             city=r["city"],
+                            country=country,
                             rating=place["rating"],
                             lat=place["lat"],
                             lng=place["lng"],
@@ -176,6 +182,27 @@ if get_all_restaurants():
         df.columns = ["Country", "City", "Restaurant Name", "Rating", "Google Maps URL"]
         df["Rating"] = df["Rating"].apply(lambda x: "★" * int(x) + "☆" * (5 - int(x)) if pd.notna(x) and x else "N/A")
         df["Google Maps URL"] = df["Google Maps URL"].apply(lambda x: f'<a href="{x}" target="_blank">View →</a>' if x else "")
+        st.markdown("""
+            <style>
+                table { width: 100%; border-collapse: collapse; }
+                th { 
+                    background: #1a1a1a; 
+                    color: #c9a96e; 
+                    font-family: 'Playfair Display', serif;
+                    text-align: center !important;
+                    padding: 10px;
+                    border-bottom: 2px solid #c9a96e;
+                }
+                td {
+                    color: #f0ead6;
+                    font-family: 'EB Garamond', serif;
+                    padding: 8px 10px;
+                    border-bottom: 1px solid #333;
+                    font-size: 14px;
+                }
+                tr:nth-child(even) td { background: #1a1a1a; }
+            </style>
+        """, unsafe_allow_html=True)
         st.write(df.to_html(escape=False, index=False), unsafe_allow_html=True)
 else:
     st.markdown("<p style='color:#555;'>No restaurants saved yet.</p>", unsafe_allow_html=True)
