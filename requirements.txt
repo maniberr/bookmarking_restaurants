@@ -3,7 +3,8 @@ altair==5.4.1
 anaconda-client==1.7.2
 anaconda-navigator==2.0.3
 anaconda-project @ file:///tmp/build/80754af9/anaconda-project_1610472525955/work
-anyio @ file:///opt/concourse/worker/volumes/live/64740ac7-3a9c-4fbb-6685-a51c4ff8b4ca/volume/anyio_1617783319350/work/dist
+annotated-types==0.7.0
+anyio==4.5.2
 apify-client==1.7.1
 apify-shared==1.1.2
 appdirs==1.4.4
@@ -34,6 +35,7 @@ blinker==1.8.2
 bokeh @ file:///opt/concourse/worker/volumes/live/65ce9588-f765-4deb-5b52-1c552a693654/volume/bokeh_1620783891289/work
 boto==2.49.0
 Bottleneck==1.3.2
+branca==0.8.2
 brotlipy==0.7.0
 cachetools==5.5.2
 certifi==2020.12.5
@@ -61,13 +63,16 @@ decorator @ file:///tmp/build/80754af9/decorator_1617916966915/work
 defusedxml @ file:///tmp/build/80754af9/defusedxml_1615228127516/work
 diff-match-patch @ file:///tmp/build/80754af9/diff-match-patch_1594828741838/work
 distributed @ file:///opt/concourse/worker/volumes/live/061a375f-fbe4-45b4-4d80-0ba96d3ee7cb/volume/distributed_1617384077473/work
+distro==1.9.0
 docutils @ file:///opt/concourse/worker/volumes/live/c75adaac-4aab-4f8b-53ac-e2f0ae899bdf/volume/docutils_1617481416178/work
 entrypoints==0.3
 et-xmlfile==1.0.1
+exceptiongroup==1.3.1
 fastcache==1.1.0
 filelock @ file:///home/linux1/recipes/ci/filelock_1610993975404/work
 flake8 @ file:///tmp/build/80754af9/flake8_1615834841867/work
 Flask @ file:///home/ktietz/src/ci/flask_1611932660458/work
+folium==0.18.0
 fsspec @ file:///tmp/build/80754af9/fsspec_1617959894824/work
 future==0.18.2
 gevent @ file:///opt/concourse/worker/volumes/live/123efac8-0706-463e-4084-078386897222/volume/gevent_1616772940436/work
@@ -76,6 +81,7 @@ gitpython==3.1.46
 glob2 @ file:///home/linux1/recipes/ci/glob2_1610991677669/work
 gmpy2==2.0.8
 greenlet @ file:///opt/concourse/worker/volumes/live/de3154a2-fbbd-4797-71f5-5fe8ea617adf/volume/greenlet_1611958369459/work
+groq==0.33.0
 h11==0.16.0
 h5py==2.10.0
 HeapDict==1.0.1
@@ -96,7 +102,7 @@ isort @ file:///tmp/build/80754af9/isort_1616355431277/work
 itsdangerous @ file:///home/ktietz/src/ci/itsdangerous_1611932585308/work
 jdcal==1.4.1
 jedi @ file:///opt/concourse/worker/volumes/live/12a2c347-a8e4-4b62-5b19-dcc92a2254f6/volume/jedi_1606932552286/work
-Jinja2 @ file:///tmp/build/80754af9/jinja2_1612213139570/work
+jinja2==3.1.6
 joblib @ file:///tmp/build/80754af9/joblib_1613502643832/work
 json5==0.9.5
 jsonschema @ file:///tmp/build/80754af9/jsonschema_1602607155483/work
@@ -118,7 +124,7 @@ llvmlite==0.36.0
 locket==0.2.1
 lxml @ file:///opt/concourse/worker/volumes/live/42fc56a4-88b4-4605-6037-9605f4e5eeeb/volume/lxml_1616443240194/work
 markdown-it-py==3.0.0
-MarkupSafe @ file:///opt/concourse/worker/volumes/live/cb778296-98db-45ad-411e-6f726e102dc3/volume/markupsafe_1594371638608/work
+MarkupSafe==2.1.5
 matplotlib==3.4.2
 mccabe==0.6.1
 mdurl==0.1.2
@@ -176,6 +182,8 @@ pycodestyle @ file:///home/ktietz/src/ci_mi/pycodestyle_1612807597675/work
 pycosat==0.6.3
 pycparser @ file:///tmp/build/80754af9/pycparser_1594388511720/work
 pycurl==7.43.0.6
+pydantic==2.10.6
+pydantic-core==2.27.2
 pydeck==0.9.1
 pydocstyle @ file:///tmp/build/80754af9/pydocstyle_1616182067796/work
 pyerfa @ file:///opt/concourse/worker/volumes/live/499ad55d-d083-454d-5032-b5d62181519d/volume/pyerfa_1619390898734/work
@@ -268,6 +276,7 @@ XlsxWriter @ file:///tmp/build/80754af9/xlsxwriter_1617224712951/work
 xlwings==0.23.0
 xlwt==1.3.0
 xmltodict==0.12.0
+xyzservices==2025.11.0
 yapf @ file:///tmp/build/80754af9/yapf_1615749224965/work
 zict==2.0.0
 zipp @ file:///tmp/build/80754af9/zipp_1615904174917/work
