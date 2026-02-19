@@ -25,7 +25,7 @@ def generate_map(output_path="map.html"):
     ).add_to(m)
 
     for r in restaurants:
-        name, address, city, rating, lat, lng, maps_url, instagram_url, date_saved = r
+        name, address, city, rating, lat, lng, maps_url, instagram_url, cuisine, date_saved = r
         if lat and lng:
             stars = "★" * int(rating) + "☆" * (5 - int(rating)) if rating else "N/A"
             popup_html = f"""

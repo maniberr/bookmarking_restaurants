@@ -18,13 +18,14 @@ def init_db():
             lng REAL,
             maps_url TEXT,
             instagram_url TEXT,
+            cuisine TEXT,
             date_saved TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
     conn.commit()
     conn.close()
 
-def save_restaurant(name, address, city, country, rating, lat, lng, maps_url, instagram_url):
+def save_restaurant(name, address, city, country, rating, lat, lng, maps_url, instagram_url, cuisine):
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     cursor.execute("SELECT id FROM restaurants WHERE name = ? AND city = ?", (name, city))
@@ -33,16 +34,16 @@ def save_restaurant(name, address, city, country, rating, lat, lng, maps_url, in
         conn.close()
         return
     cursor.execute("""
-        INSERT INTO restaurants (name, address, city, country, rating, lat, lng, maps_url, instagram_url)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, (name, address, city, country, rating, lat, lng, maps_url, instagram_url))
+        INSERT INTO restaurants (name, address, city, country, rating, lat, lng, maps_url, instagram_url, cuisine)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)
+    """, (name, address, city, country, rating, lat, lng, maps_url, instagram_url, cuisine))
     conn.commit()
     conn.close()
 
 def get_all_restaurants():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
-    cursor.execute("SELECT name, address, city, rating, lat, lng, maps_url, instagram_url, date_saved FROM restaurants")
+    cursor.execute("SELECT name, address, city, rating, lat, lng, maps_url, instagram_url, cuisine, date_saved FROM restaurants")
     rows = cursor.fetchall()
     conn.close()
     return rows

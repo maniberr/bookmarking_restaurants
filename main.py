@@ -37,7 +37,8 @@ def process_url(url: str):
                 lat=place["lat"],
                 lng=place["lng"],
                 maps_url=place["maps_url"],
-                instagram_url=url
+                instagram_url=url,
+                cuisine=place["cuisine"]
             )
         else:
             print(f"  Could not find {r['restaurant']} on Google Maps.")

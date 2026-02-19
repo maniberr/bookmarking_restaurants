@@ -135,7 +135,8 @@ if run and urls_input.strip():
                             lat=place["lat"],
                             lng=place["lng"],
                             maps_url=place["maps_url"],
-                            instagram_url=url
+                            instagram_url=url,
+                            cuisine=place["cuisine"]
                         )
                         all_found.append(place)
                     else:
@@ -152,6 +153,7 @@ if run and urls_input.strip():
                 <div class="restaurant-card">
                     <div class="restaurant-name">{place['name']}</div>
                     <div class="restaurant-detail">{place['address']}</div>
+                    <div class="restaurant-cuisine">{place['cuisine']}</div>
                     <div class="stars">{stars}</div>
                     <div style="margin-top:8px;">
                         <a href="{place['maps_url']}" target="_blank" style="color:#c9a96e;font-size:13px;">View on Google Maps →</a>
@@ -179,7 +181,7 @@ st.markdown("<h2>All Saved Restaurants</h2>", unsafe_allow_html=True)
 if get_all_restaurants():
     with st.spinner("Loading restaurant list..."):
         df = get_restaurants_df()
-        df.columns = ["Country", "City", "Restaurant Name", "Rating", "Google Maps URL"]
+        df.columns = ["Country", "City","Cuisine", "Restaurant Name", "Rating", "Google Maps URL"]
         df["Rating"] = df["Rating"].apply(lambda x: "★" * int(x) + "☆" * (5 - int(x)) if pd.notna(x) and x else "N/A")
         df["Google Maps URL"] = df["Google Maps URL"].apply(lambda x: f'<a href="{x}" target="_blank">View →</a>' if x else "")
         st.markdown("""
