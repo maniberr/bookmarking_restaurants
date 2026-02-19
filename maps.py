@@ -6,33 +6,24 @@ load_dotenv()
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
-CUISINE_TYPES = {
-    "american_restaurant", "bakery", "bar", "barbecue_restaurant",
-    "brazilian_restaurant", "breakfast_restaurant", "brunch_restaurant",
-    "cafe", "chinese_restaurant", "coffee_shop", "fast_food_restaurant",
-    "french_restaurant", "greek_restaurant", "hamburger_restaurant",
-    "ice_cream_shop", "indian_restaurant", "indonesian_restaurant",
-    "italian_restaurant", "japanese_restaurant", "korean_restaurant",
-    "lebanese_restaurant", "mediterranean_restaurant", "mexican_restaurant",
-    "middle_eastern_restaurant", "pizza_restaurant", "ramen_restaurant",
-    "sandwich_shop", "seafood_restaurant", "spanish_restaurant",
-    "steak_house", "sushi_restaurant", "thai_restaurant",
-    "turkish_restaurant", "vegan_restaurant", "vegetarian_restaurant",
-    "vietnamese_restaurant"
-}
-
 def get_cuisine(place_id: str) -> str:
-    url = "https://maps.googleapis.com/maps/api/place/details/json"
-    params = {
-        "place_id": place_id,
-        "fields": "types",
-        "key": GOOGLE_API_KEY
+    url = f"https://places.googleapis.com/v1/places/{place_id}"
+    headers = {
+        "X-Goog-Api-Key": GOOGLE_API_KEY,
+        "X-Goog-FieldMask": "primaryTypeDisplayName,editorialSummary"
     }
-    response = requests.get(url, params=params)
-    types = response.json().get("result", {}).get("types", [])
-    for t in types:
-        if t in CUISINE_TYPES:
-            return t.replace("_restaurant", "").replace("_", " ").title()
+    response = requests.get(url, headers=headers)
+    data = response.json()
+    #print(f"  Place details response: {data}")  # debug, remove after testing
+
+    primary_type = data.get("primaryTypeDisplayName", {}).get("text", "")
+    if primary_type:
+        return primary_type
+
+    summary = data.get("editorialSummary", {}).get("text", "")
+    if summary:
+        return summary
+
     return "Restaurant"
 
 def find_place(restaurant: str, city: str) -> dict:
